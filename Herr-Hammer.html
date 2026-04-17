@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototyp von Herr Hammer</title>
+
+  <style>
+    body {
+      background-color: #f4f7fa;
+      height: 100vh;
+      justify-content: center;
+      font-family:"WDXL Lubrifont SC";
+    }
+
+    @font-face {
+            font-family: "WDXL Lubrifont SC";
+            src: url(WDXLLubrifontSC-Regular.ttf) format("truetype");
+        }
+
+        
+    .robo-model {
+      height: 75%;
+      width: 90%;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+        
+    model-viewer {
+      height: 100%;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      font-size: xxx-large;
+    }
+
+    .back {
+      font-size: larger;
+      padding-left: 2%;
+      padding-top: 0.4%;
+    }
+
+    .info {
+      font-size: x-large;
+      padding-right: 1%;
+      padding-left: 1%;
+      width: 10%;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .pins {
+      text-align: left;
+      padding-left: 2%;
+    }
+
+    .ansicht {
+      text-align: right;
+      padding-right: 2%;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      align-items: center;
+      margin: auto;
+      text-align: center;
+      font-size: x-large;
+      padding-bottom: 2%;
+    }
+
+  </style>
+  
+</head>
+
+<body>
+  <a class="back" href="index.html"><-Back</a><br>
+
+  <h1 class="header">Prototyp von Herr Hammer</h1><br>
+  
+  <div class="robo-model">
+    <model-viewer id="model" alt="3d model" src="RoboHerrHammer.glb"
+      exposure="0.5"
+      camera-controls
+      touch-action="pan-y"
+      environment-image="legacy"
+      shadow-intensity="0"
+      camera-orbit="0deg 75deg auto"
+      field-of-view="30deg"
+      animation-name="RoboHerrHammerAction">
+    </model-viewer>  
+  </div>
+
+  <div class="options">
+    <div class="ansicht">
+      <p>
+        Explosion:<br>
+        <button id="playBtn">an</button><br>
+        <button id="stopBtn">aus</button>
+      </p>
+    </div>
+
+    <div class="pins">
+      <p class="pins-menu">
+        Pins:<br>
+        <button id="onBtn">an</button><br>
+        <button id="offBtn">aus</button>
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="model-viewer.min.js"></script>
+
+  <script>
+    // Add a state variable to track animation status
+    let animationState = "idle"; // "idle", "playing-part1", "paused-at-end"
+    let savedTime = 0;
+    let wasPlaying = false;
+    const viewer = document.getElementById("model");
+    const button = document.getElementById("playBtn");
+    const stopButton = document.getElementById("stopBtn");
+    let animationTimeout;
+
+    viewer.addEventListener("load", () => {
+      console.log("Available animations:", viewer.availableAnimations);
+      viewer.loop = false;
+      
+      // Restore animation state if switching models
+      if (savedTime > 0) {
+        viewer.currentTime = savedTime;
+        if (wasPlaying) {
+          viewer.play();
+        }
+        savedTime = 0;
+        wasPlaying = false;
+      }
+    });
+
+    // Play Part 1 (0-2958ms)
+    button.addEventListener("click", () => {
+      if (!viewer.animationName) return;
+      
+      // Only play part 1 if animation is idle (not playing or paused in middle)
+      if (animationState === "playing-part1" || animationState === "paused-at-end" || animationState === "playing-part2") return;
+      
+      if (animationTimeout) clearTimeout(animationTimeout);
+      
+      animationState = "playing-part1";
+      viewer.currentTime = 0;
+      viewer.play();
+      
+      // Pause at end of part 1
+      animationTimeout = setTimeout(() => {
+        viewer.pause();
+        animationState = "paused-at-end";
+      }, 2958);
+    });
+
+    // Play Part 2 (3000-5958ms) - only if part 1 just finished
+    stopButton.addEventListener("click", () => {
+      if (!viewer.animationName) return;
+      
+      // Only allow part 2 if we just finished part 1
+      if (animationState !== "paused-at-end") return;
+      
+      if (animationTimeout) clearTimeout(animationTimeout);
+      
+      animationState = "playing-part2";
+      viewer.currentTime = 3000;
+      viewer.play();
+      
+      // Play for 2958ms (3000 to 5958)
+      animationTimeout = setTimeout(() => {
+        viewer.pause();
+        animationState = "idle";
+      }, 2958);
+    });
+
+    onBtn.addEventListener("click", () => {
+      // Save current animation state before switching
+      savedTime = viewer.currentTime;
+      wasPlaying = (animationState === "playing-part1" || animationState === "playing-part2");
+      viewer.src = "RoboHerrHammerPins.glb";
+    });
+
+    offBtn.addEventListener("click", () => {
+      // Save current animation state before switching
+      savedTime = viewer.currentTime;
+      wasPlaying = (animationState === "playing-part1" || animationState === "playing-part2");
+      viewer.src = "RoboHerrHammer.glb";
+    });
+
+    viewer.addEventListener("animation-finished", () => {
+      viewer.pause();
+      if (animationTimeout) clearTimeout(animationTimeout);
+    });
+  </script>
+
+</body>
+
+</html>

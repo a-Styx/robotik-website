@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willkommen!</title>
+
+    <style>
+        * {
+            font-size: x-large;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        body {
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family:"WDXL Lubrifont SC";
+            background-color: #f4f7fa;
+            color: #0f1720;
+            line-height: 1.6;
+        }
+        
+        .model-container {
+            height: 700px;
+            width: 700px;
+        }
+        
+        model-viewer {
+            height: 100%;
+            width: 100%;
+        }
+
+        .bold {
+            font-weight: 1000;
+        }
+
+        h1, h2, h3 {
+            letter-spacing: 0.04rem;
+            font-weight: 600;
+        }
+
+        .header {
+            font-size: xxx-large;
+        }
+
+        .table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+            align-items: center;
+            margin: auto;
+            text-align: center;
+            font-size: x-large;
+        }
+
+        .right {
+            text-align: left;
+            align-items: left;
+            padding-left: 1%;
+        }
+
+        .left {
+            text-align: right;
+            align-items: right;
+            padding-right: 1%;
+        }
+
+        .leftteams {
+            text-align: right;
+            align-items: right;
+            padding-right: 2%;
+        }
+
+        .rightteams {
+            text-align: left;
+            align-items: left;
+            padding-left: 2%;
+        }
+
+        @font-face {
+            font-family: "WDXL Lubrifont SC";
+            src: url(WDXLLubrifontSC-Regular.ttf) format("truetype");
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1 class="header">Herzlich Willkommen!</h1>
+
+    <p>
+        Das hier ist unsere Roboterpräsentation!<br>
+        Programmiert mit <b class="bold">HTML</b>,<b class="bold">CSS</b>und<b class="bold">JavaScript</b><br>
+        Hier auf unserer Website finden sich all unsere Wettkampfroboter von 2023 bis 2027, sowie alle Prototypen für dieses Jahr.
+    </p>
+
+    <h3><u>Unsere Roboter:</u></h3>
+
+    <div class="table">
+         <div class="left">
+            <a href="Robo-2027.html">2027</a><br>
+     
+            <a href="Robo-2026.html">2026</a><br>
+        </div>
+
+        <div class="right">
+            <a href="Robo-2024-25.html">2024/25</a><br>
+    
+            <a href="Robo-2023.html">2023</a><br>
+        </div>
+    </div>
+
+    <p>
+        <h3><u>Der Wettkampf der Roboter</u></h3><br>
+
+        Zur Auswahl unseres neusten Roboters veranstalteten wir einen kleinen Wettbewerb.<br>
+        Der beste Roboter sollte gewinnen!
+    </p>
+
+    <div class="table">
+        <div class="left">
+            <p class="leftteams">Team 1:</p>
+            <a href="Joris-Jan.html">Joris und Jan</a><br>
+            <br>
+            <p class="leftteams">Team 2:</p>
+            <a href="Tobi-Lias.html">Tobi und Lias</a>
+        </div>
+
+        <div class="right">
+            <p class="rightteams">Team 3:</p>
+            <a href="Maxim-Samuele.html">Maxim und Samuele</a><br>
+            <br>
+            <p class="rightteams">Team 4:</p>
+            <a href="Herr-Hammer.html">Herr Hammer</a>
+        </div>
+    </div>
+    <p>
+        <b class="bold"><u>Todo:</u></b><br>
+        <br>
+        Roboter 3d Designs (Teams: 1, 3, 4 und Jahre 26, 27)<br>
+        Roboterinformationen<br>
+    </p>
+
+    <script>
+        const hamMenu = document.querySelector('.ham-menu');
+
+        const offScreenMenu = document.querySelector('.off-screen-menu');
+
+        hamMenu.addEventListener('click', () => {
+            hamMenu.classList.toggle('active');
+            offScreenMenu.classList.toggle('active');
+        });
+    </script>
+
+</body>
+
+</html>
