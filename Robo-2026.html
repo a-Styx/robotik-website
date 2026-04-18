@@ -90,7 +90,7 @@
   <h1 class="header">Wettkampfroboter 2026</h1><br>
   
   <div class="robo-model">
-    <model-viewer id="model" alt="3d model" src="Robo2026.glb"
+    <model-viewer id="model" alt="3d model" src="Robo26.glb"
       exposure="0.5"
       camera-controls
       touch-action="pan-y"
@@ -191,7 +191,7 @@
       // Save current animation state before switching
       savedTime = viewer.currentTime;
       wasPlaying = (animationState === "playing-part1" || animationState === "playing-part2");
-      viewer.src = "Robo2026Pins.glb";
+      viewer.src = "Robo26Pins.glb";
     });
 
     offBtn.addEventListener("click", () => {
