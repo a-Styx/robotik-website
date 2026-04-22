@@ -18,7 +18,7 @@
   <h1 class="header">Prototyp von Maxim und Samuele</h1><br>
   
   <div class="robo-model">
-    <model-viewer id="model" alt="3d model" src="RoboMaxim-Samuele.glb"
+    <model-viewer id="model" alt="3d model" src="RoboMaxim-Samu.glb"
       exposure="0.5"
       camera-controls
       touch-action="pan-y"
@@ -26,7 +26,7 @@
       shadow-intensity="0"
       camera-orbit="0deg 75deg auto"
       field-of-view="30deg"
-      animation-name="RoboMaxim-SamueleAction">
+      animation-name="RoboMaxim-SamuAction">
     </model-viewer>  
   </div>
 
@@ -119,14 +119,14 @@
       // Save current animation state before switching
       savedTime = viewer.currentTime;
       wasPlaying = (animationState === "playing-part1" || animationState === "playing-part2");
-      viewer.src = "RoboMaxim-SamuelePins.glb";
+      viewer.src = "RoboMaxim-SamuPins.glb";
     });
 
     offBtn.addEventListener("click", () => {
       // Save current animation state before switching
       savedTime = viewer.currentTime;
       wasPlaying = (animationState === "playing-part1" || animationState === "playing-part2");
-      viewer.src = "RoboMaxim-Samuele.glb";
+      viewer.src = "RoboMaxim-Samu.glb";
     });
 
     viewer.addEventListener("animation-finished", () => {
